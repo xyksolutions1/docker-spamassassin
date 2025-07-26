@@ -1,3 +1,10 @@
+## 2.1.0 2025-07-26 <dave at tiredofit dot ca>
+
+   ### Added
+      - Modernize image to support tireodfit/alpine:7.x series
+      - Add LOG_TYPE environment variable (file*,console,both,none)
+
+
 ## 2.0.13 2024-12-07 <dave at tiredofit dot ca>
 
    ### Added

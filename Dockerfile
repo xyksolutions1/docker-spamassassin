@@ -4,7 +4,9 @@ ARG DISTRO_VARIANT=3.21
 FROM docker.io/tiredofit/${DISTRO}:${DISTRO_VARIANT}
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
-ENV CONTAINER_ENABLE_MESSAGING=FALSE
+ENV CONTAINER_ENABLE_MESSAGING=FALSE \
+    IMAGE_NAME="tiredofit/spamassassin" \
+    IMAGE_REPO_URL="https://github.com/tiredofit/docker-spamassassin/"
 
 RUN source /assets/functions/00-container && \
     set -x && \
@@ -13,13 +15,14 @@ RUN source /assets/functions/00-container && \
     \
     package update && \
     package upgrade && \
-    package install  .spamassassin-run-deps \
-           razor \
-           spamassassin \
-           && \
+    package install .spamassassin-run-deps \
+                       gpg-agent \
+                       razor \
+                       spamassassin \
+                       && \
    \
     mkdir -p /assets/spamassassin && \
-    cp -R /etc/mail/spamassassin/* /assets/spamassassin && \
+    cp -aR /etc/mail/spamassassin/* /assets/spamassassin && \
     \
     rm -rf /etc/mail/spamassassin \
            /var/lib/spamassassin

@@ -43,11 +43,11 @@ Builds of the image are available on [Docker Hub](https://hub.docker.com/r/tired
 ```bash
 docker pull docker.io/tiredofit/spamassassin:(imagetag)
 ```
-Builds of the image are also available on the [Github Container Registry](https://github.com/tiredofit/docker-spamassassin/pkgs/container/docker-spamassassin) 
- 
+Builds of the image are also available on the [Github Container Registry](https://github.com/tiredofit/docker-spamassassin/pkgs/container/docker-spamassassin)
+
 ```
 docker pull ghcr.io/tiredofit/docker-spamassassin:(imagetag)
-``` 
+```
 
 The following image tags are available along with their tagged release based on what's written in the [Changelog](CHANGELOG.md):
 
@@ -89,27 +89,28 @@ Be sure to view the following repositories to understand all the customizable op
 | ------------------------------------------------------ | -------------------------------------- |
 | [OS Base](https://github.com/tiredofit/docker-alpine/) | Customized Image based on Alpine Linux |
 
-| Parameter               | Description                             | Default                  |
-| ----------------------- | --------------------------------------- | ------------------------ |
-| `CHILD_MAX`             | Max Children                            | `5`                      |
-| `CHILD_MAX_CONNECTIONS` | Max connections per child               | `200`                    |
-| `CHILD_MAX_SPARE`       | Max Spare Children                      | `2`                      |
-| `CHILD_MIN`             | Minimum Child Process                   | `1`                      |
-| `CHILD_MIN_SPARE`       | Minimum Spare Children                  | `1`                      |
-| `CONFIG_PATH`           | Config directory                        | `/config/`               |
-| `DATA_PATH`             | Updates / Rulesets directory            | `/data/`                 |
-| `ENABLE_LEARNING`       | Enable Learning/Reporting               | `TRUE`                   |
-| `ENABLE_ROUND_ROBIN`    | Enable Roundrobin Forking for childs    | `FALSE`                  |
-| `ENABLE_UPDATES`        | Enable Ruleset Updates                  | `TRUE`                   |
-| `LISTEN_PORT`           | TCP Listen Port                         | `783`                    |
-| `LOG_FILE`              | Log File                                | `spamassassin.log`       |
-| `LOG_PATH`              | Log Logcation                           | `/logs/`                 |
-| `PID_FILE`              | PID File                                | `spamassassin.pid`       |
-| `PID_PATH`              | PID Path                                | `/var/run/spamassassin/` |
-| `TIMEOUT_CHILD`         | Child Timeout in Seconds                | `300`                    |
-| `TIMEOUT_IDENT`         | Ident Timeout in Seconds                | `5`                      |
-| `TIMEOUT_TCP`           | TCP Timeout in Seconds                  | `30`                     |
-| `UPDATE_PERIOD`         | Cron Expression when to perform updates | `15 23 * * *`            |
+| Parameter               | Description                              | Default                  |
+| ----------------------- | ---------------------------------------- | ------------------------ |
+| `CHILD_MAX`             | Max Children                             | `5`                      |
+| `CHILD_MAX_CONNECTIONS` | Max connections per child                | `200`                    |
+| `CHILD_MAX_SPARE`       | Max Spare Children                       | `2`                      |
+| `CHILD_MIN`             | Minimum Child Process                    | `1`                      |
+| `CHILD_MIN_SPARE`       | Minimum Spare Children                   | `1`                      |
+| `CONFIG_PATH`           | Config directory                         | `/config/`               |
+| `DATA_PATH`             | Updates / Rulesets directory             | `/data/`                 |
+| `ENABLE_LEARNING`       | Enable Learning/Reporting                | `TRUE`                   |
+| `ENABLE_ROUND_ROBIN`    | Enable Roundrobin Forking for childs     | `FALSE`                  |
+| `ENABLE_UPDATES`        | Enable Ruleset Updates                   | `TRUE`                   |
+| `LISTEN_PORT`           | TCP Listen Port                          | `783`                    |
+| `LOG_FILE`              | Log File                                 | `spamassassin.log`       |
+| `LOG_PATH`              | Log Logcation                            | `/logs/`                 |
+| `LOG_TYPE`              | Log to `console` `file` `both` or `none` | `file`                   |
+| `PID_FILE`              | PID File                                 | `spamassassin.pid`       |
+| `PID_PATH`              | PID Path                                 | `/var/run/spamassassin/` |
+| `TIMEOUT_CHILD`         | Child Timeout in Seconds                 | `300`                    |
+| `TIMEOUT_IDENT`         | Ident Timeout in Seconds                 | `5`                      |
+| `TIMEOUT_TCP`           | TCP Timeout in Seconds                   | `30`                     |
+| `UPDATE_PERIOD`         | Cron Expression when to perform updates  | `15 23 * * *`            |
 
 ### Networking
 

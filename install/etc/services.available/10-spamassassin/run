@@ -7,11 +7,29 @@ PROCESS_NAME="spamassassin"
 check_container_initialized
 check_service_initialized init
 
-parse_arguments
+case "${LOG_TYPE,,}" in
+    console )
+        :
+    ;;
+    file )
+        exec_arg=silent
+        sa_log="--syslog=${LOG_PATH}/${LOG_FILE}"
+    ;;
+    both )
+        sa_log="--syslog=${LOG_PATH}/${LOG_FILE}"
+    ;;
+    none )
+        exec_arg=silent
+    ;;
+esac
+
+spamassassin_runtime_parse_arguments
 liftoff
 
+
 print_start "Starting spamassassin"
-exec spamd \
+
+${exec_arg} exec spamd \
 			--username spamassassin \
             --group spamassassin \
 			--allowed-ips 0.0.0.0/0 \
@@ -23,8 +41,7 @@ exec spamd \
 			--max-spare=${CHILD_MAX_SPARE} \
 			--min-children=${CHILD_MIN} \
 			--min-spare=${CHILD_MIN_SPARE} \
-			--pidfile ${PID_PATH}${PID_FILE} \
-			--syslog=${LOG_PATH}${LOG_FILE} \
+			--pidfile ${PID_PATH}/${PID_FILE} \
 			--timeout-child=${TIMEOUT_CHILD} \
 			--timeout-tcp=${TIMEOUT_TCP} \
-			--nouser-config $debug_arg $learning_arg $round_robin_arg
+			--nouser-config ${sa_log} ${debug_arg} ${learning_arg} ${round_robin_arg}

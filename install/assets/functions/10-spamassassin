@@ -1,16 +1,43 @@
 #!/command/with-contenv bash
 
-parse_arguments() {
-	### Set Debug Mode
-	if var_true $DEBUG_MODE ; then
-		debug_arg="--debug" 
+spamassassin_bootstrap_filesystem() {
+    if [ ! -d "${CONFIG_PATH}" ]; then
+        mkdir -p "${CONFIG_PATH}"
+    fi
+    if [ "$(stat -c %U "${CONFIG_PATH}")" != spamassassin ] ; then chown -R spamassassin:spamassassin "${CONFIG_PATH}" ; fi
+    ln -sf ${CONFIG_PATH} /etc/mail/spamassassin
+
+    if [ ! -d "${DATA_PATH}" ]; then
+        mkdir -p "${DATA_PATH}/.spamassassin"
+    fi
+    if [ "$(stat -c %U "${DATA_PATH}")" != spamassassin ] ; then chown -R spamassassin:spamassassin "${DATA_PATH}" ; fi
+    ln -sf ${DATA_PATH} /var/lib/spamassassin
+
+    case "${LOG_TYPE,,}" in
+        file | both )
+            if [ ! -d "${LOG_PATH}" ]; then
+                mkdir -p "${LOG_PATH}"
+            fi
+            if [ "$(stat -c %U "${LOG_PATH}")" != spamassassin ] ; then chown -R spamassassin:spamassassin "${LOG_PATH}" ; fi
+        ;;
+    esac
+
+    if [ ! -d "${PID_PATH}" ]; then
+        mkdir -p "${PID_PATH}"
+    fi
+    if [ "$(stat -c %U "${PID_PATH}")" != spamassassin ] ; then chown spamassassin:spamassassin "${PID_PATH}" ; fi
+}
+
+spamassassin_runtime_parse_arguments() {
+	if var_true "${DEBUG_MODE}" ; then
+		debug_arg="--debug"
 	fi
 
-	if var_true $ENABLE_LEARNING ; then
+	if var_true "${ENABLE_LEARNING}" ; then
 		learning_arg="--allow-tell"
 	fi
 
-	if var_true $ENABLE_ROUND_ROBIN ; then
+	if var_true "${ENABLE_ROUND_ROBIN}" ; then
 		round_robin_arg="--round-robin"
 	fi
 }

@@ -13,6 +13,7 @@ ENABLE_UPDATES=${ENABLE_UPDATES:-"TRUE"}
 LISTEN_PORT=${LISTEN_PORT:-"783"}
 LOG_FILE=${LOG_FILE:-"spamassassin.log"}
 LOG_PATH=${LOG_PATH:-"/logs/"}
+LOG_TYPE=${LOG_TYPE-"file"}
 PID_FILE=${PID_FILE:-"spamassassin.pid"}
 PID_PATH=${PID_PATH:-"/var/run/spamassassin/"}
 TIMEOUT_CHILD=${TIMEOUT_CHILD:-"300"}
